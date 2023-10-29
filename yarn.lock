@@ -6111,6 +6111,11 @@ pretty@2.0.0:
     extend-shallow "^2.0.1"
     js-beautify "^1.6.12"
 
+primeicons@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/primeicons/-/primeicons-6.0.1.tgz#431fa7c79825934eefd62087d8e1faa6a9e376ad"
+  integrity sha512-KDeO94CbWI4pKsPnYpA1FPjo79EsY9I+M8ywoPBSf9XMXoe/0crjbUK7jcQEDHuc0ZMRIZsxH3TYLv4TUtHmAA==
+
 primevue@^3.38.1:
   version "3.38.1"
   resolved "https://registry.yarnpkg.com/primevue/-/primevue-3.38.1.tgz#aa81e97e1ff66cc7dac7e7d42ed55aa6e7296d7f"
