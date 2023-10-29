@@ -6111,6 +6111,11 @@ pretty@2.0.0:
     extend-shallow "^2.0.1"
     js-beautify "^1.6.12"
 
+primevue@^3.38.1:
+  version "3.38.1"
+  resolved "https://registry.yarnpkg.com/primevue/-/primevue-3.38.1.tgz#aa81e97e1ff66cc7dac7e7d42ed55aa6e7296d7f"
+  integrity sha512-mRzRIF1EXGD0uxh8jitQaHDqgSt157OUhPTwfn2I/+96ljNtyXbNqo8oeFVNSzCiH9Zt1ECUziSh1PfFxJqK5A==
+
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.npmmirror.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
