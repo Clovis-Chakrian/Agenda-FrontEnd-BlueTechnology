@@ -15,6 +15,7 @@
         raised
         icon="pi pi-pencil"
         aria-label="editar contato"
+        @click="handleNavigateToRoute('edit')"
       />
     </div>
     <Divider />
@@ -38,3 +39,21 @@
   width: 25%;
 }
 </style>
+
+<script>
+import { useRouter } from "vue-router";
+
+export default {
+  setup() {
+    const router = useRouter();
+
+    function handleNavigateToRoute(name) {
+      router.push({ name });
+    }
+
+    return {
+      handleNavigateToRoute,
+    };
+  },
+};
+</script>
