@@ -23,7 +23,7 @@
   </main>
 </template>
 
-<style scoped>
+<style>
 .main {
   width: 100%;
   height: 90vh;
