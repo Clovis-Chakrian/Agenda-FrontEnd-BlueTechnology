@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../pages/Home';
+import EditContact from '../pages/EditContact';
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: Home
+  },
+  {
+    path: '/edit',
+    name: 'edit',
+    component: EditContact
   }
 ];
 
