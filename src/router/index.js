@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../pages/Home';
 import EditContact from '../pages/EditContact';
+import CreateContact from '../pages/CreateContact';
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/edit',
     name: 'edit',
     component: EditContact
+  },
+  {
+    path: '/create-contact',
+    name: 'create',
+    component: CreateContact
   }
 ];
 
