@@ -7,7 +7,7 @@
         style="background-color: #2196f3; color: #ffffff"
         shape="circle"
       />
-      <p class="contact-name">{{ name }} {{lastName}}</p>
+      <p class="contact-name">{{ name }} {{ lastName }}</p>
       <Button size="small" text raised icon="pi pi-phone" aria-label="ligar" />
       <Button
         size="small"
@@ -15,7 +15,7 @@
         raised
         icon="pi pi-pencil"
         aria-label="editar contato"
-        @click="handleNavigateToRoute('edit')"
+        @click="handleNavigateToRoute()"
       />
     </div>
     <Divider />
@@ -41,39 +41,35 @@
 </style>
 
 <script>
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
-  props: [
-    'name',
-    'lastName'
-  ],
+  props: ["id", "name", "lastName"],
 
   setup(props) {
     const router = useRouter();
     const state = reactive({
-      initials: ''
+      initials: "",
     });
 
     function handleGetInitials(name, lastName) {
-      const firstLetter = name.split('')[0];
-      const secondLetter = lastName.split('')[0];
+      const firstLetter = name.split("")[0];
+      const secondLetter = lastName.split("")[0];
       state.initials = `${firstLetter}${secondLetter}`;
-    };
+    }
 
-    function handleNavigateToRoute(routeName) {
-      router.push({ name: routeName });
+    function handleNavigateToRoute() {
+      router.push({ name: 'edit', query: { contactId: props.id } });
     }
 
     onMounted(() => {
       handleGetInitials(props.name, props.lastName);
-      console.log(state.initials);
-    })
+    });
 
     return {
       handleNavigateToRoute,
-      state
+      state,
     };
   },
 };
