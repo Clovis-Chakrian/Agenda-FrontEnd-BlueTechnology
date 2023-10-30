@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/edit',
     name: 'edit',
-    component: EditContact
+    component: EditContact,
   },
   {
     path: '/create-contact',
