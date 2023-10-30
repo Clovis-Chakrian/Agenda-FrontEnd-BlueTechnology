@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+import ToastService from 'primevue/toastservice';
 
 import 'primevue/resources/themes/lara-light-teal/theme.css';
 import 'primeicons/primeicons.css';
@@ -10,14 +11,17 @@ import Button from 'primevue/button';
 import Divider from 'primevue/divider';
 import InputText from 'primevue/inputtext';
 import InputMask from 'primevue/inputmask';
+import Toast from 'primevue/toast';
 
 const app = createApp(App);
 app.use(PrimeVue);
+app.use(ToastService);
 app.use(router);
 app.mount('#app');
 
 app.component('Avatar', Avatar);
 app.component('Button', Button);
 app.component('Divider', Divider);
-app.component('InputText', InputText)
-app.component('InputMask', InputMask)
+app.component('InputText', InputText);
+app.component('InputMask', InputMask);
+app.component('Toast', Toast)
