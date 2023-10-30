@@ -2,7 +2,7 @@
   <div class="contact-card">
     <div class="contact-card-info">
       <Avatar
-        label="AS"
+        :label="state.initials"
         size="large"
         style="background-color: #2196f3; color: #ffffff"
         shape="circle"
