@@ -2,12 +2,12 @@
   <div class="contact-card">
     <div class="contact-card-info">
       <Avatar
-        label="CC"
+        label="AS"
         size="large"
         style="background-color: #2196f3; color: #ffffff"
         shape="circle"
       />
-      <p class="contact-name">Clóvis Chakrian</p>
+      <p class="contact-name">{{ name }} {{lastName}}</p>
       <Button size="small" text raised icon="pi pi-phone" aria-label="ligar" />
       <Button
         size="small"
@@ -41,18 +41,39 @@
 </style>
 
 <script>
+import { onMounted, reactive } from 'vue';
 import { useRouter } from "vue-router";
 
 export default {
-  setup() {
-    const router = useRouter();
+  props: [
+    'name',
+    'lastName'
+  ],
 
-    function handleNavigateToRoute(name) {
-      router.push({ name });
+  setup(props) {
+    const router = useRouter();
+    const state = reactive({
+      initials: ''
+    });
+
+    function handleGetInitials(name, lastName) {
+      const firstLetter = name.split('')[0];
+      const secondLetter = lastName.split('')[0];
+      state.initials = `${firstLetter}${secondLetter}`;
+    };
+
+    function handleNavigateToRoute(routeName) {
+      router.push({ name: routeName });
     }
+
+    onMounted(() => {
+      handleGetInitials(props.name, props.lastName);
+      console.log(state.initials);
+    })
 
     return {
       handleNavigateToRoute,
+      state
     };
   },
 };
