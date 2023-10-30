@@ -1,6 +1,6 @@
 <template>
   <main>
-    <ContactCard v-for="contact in state.contacts" :key="contact.id"/>
+    <ContactCard v-for="contact in state.contacts" :key="contact.id" :name="contact.name" :lastName="contact.lastName"/>
   </main>
   <Button
     icon="pi pi-plus"
@@ -14,7 +14,7 @@
 <script>
 import ContactCard from "../../components/ContactCard/index.vue";
 import { useRouter } from "vue-router";
-import { onBeforeMount, onMounted, reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import { api } from "../../services/api";
 
 export default {
