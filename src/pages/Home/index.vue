@@ -7,19 +7,31 @@
     rounded
     aria-label="adicionar contato"
     class="btn-add-contact"
+    @click="handleNavigateToRoute('create')"
   />
 </template>
 
 <script>
-import ContactCard from '../../components/ContactCard/index.vue';
+import ContactCard from "../../components/ContactCard/index.vue";
+import { useRouter } from "vue-router";
+
 export default {
   components: {
-    ContactCard
+    ContactCard,
   },
+
   setup() {
-    
+    const router = useRouter();
+
+    function handleNavigateToRoute(name) {
+      router.push({ name });
+    }
+
+    return {
+      handleNavigateToRoute
+    }
   },
-}
+};
 </script>
 
 <style scoped>
