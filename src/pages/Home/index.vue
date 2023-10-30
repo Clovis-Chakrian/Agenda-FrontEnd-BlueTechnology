@@ -1,6 +1,6 @@
 <template>
   <main>
-    <ContactCard v-for="contact in state.contacts" :key="contact.id" :name="contact.name" :lastName="contact.lastName"/>
+    <ContactCard v-for="contact in state.contacts" :key="contact.id" :name="contact.name" :lastName="contact.lastName" :id="contact.id"/>
   </main>
   <Button
     icon="pi pi-plus"
