@@ -1,6 +1,6 @@
 <template>
   <main>
-    <ContactCard />
+    <ContactCard v-for="contact in state.contacts" :key="contact.id"/>
   </main>
   <Button
     icon="pi pi-plus"
@@ -14,6 +14,8 @@
 <script>
 import ContactCard from "../../components/ContactCard/index.vue";
 import { useRouter } from "vue-router";
+import { onBeforeMount, onMounted, reactive } from "vue";
+import { api } from "../../services/api";
 
 export default {
   components: {
@@ -22,14 +24,28 @@ export default {
 
   setup() {
     const router = useRouter();
+    const state = reactive({
+      contacts: [],
+    });
+
+    function handleFetchData() {
+      api.get("/Contact").then((res) => {
+        state.contacts = res.data;
+      });
+    }
 
     function handleNavigateToRoute(name) {
       router.push({ name });
     }
 
+    onMounted(() => {
+      handleFetchData();
+    });
+
     return {
-      handleNavigateToRoute
-    }
+      state,
+      handleNavigateToRoute,
+    };
   },
 };
 </script>
