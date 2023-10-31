@@ -1,5 +1,6 @@
 <template>
   <Toast />
+  <ConfirmDialog></ConfirmDialog>
   <header>
     <a href="">Voltar</a>
   </header>
@@ -57,7 +58,7 @@
       }}</small>
 
       <Button label="Atualizar" @click="handleUpdateData()" />
-      <Button label="Deletar" class="delete-btn" />
+      <Button label="Deletar" class="delete-btn" @click="handleDeleteConfirmation()" />
     </form>
   </main>
 </template>
@@ -69,6 +70,7 @@ import { api } from "@/services/api";
 import { validationRules } from "../../services/validation";
 import { useVuelidate } from "@vuelidate/core";
 import { useToast } from "primevue/usetoast";
+import { useConfirm } from "primevue/useconfirm";
 
 export default {
   setup() {
@@ -93,6 +95,7 @@ export default {
 
     const v$ = useVuelidate(validationRules, state.contact);
     const toast = useToast();
+    const confirmDialog = useConfirm();
 
     onMounted(() => {
       handleGetContact();
@@ -175,13 +178,53 @@ export default {
         });
     }
 
-    function handleDelete() {
+    async function handleDelete() {
       api
         .delete(`/Contact/${state.contactId}`)
-        .then(() => {})
+        .then(() => {
+          toast.add({
+            severity: "info",
+            summary: "Contato deletado com sucesso!",
+            detail: `${state.contact.name} ${state.contact.lastName} foi removido de sua lista de contatos com sucesso! Você será redirecionado para a página inicial agora.`,
+            life: 5000,
+          });
+
+          setTimeout(() => {
+            router.back();
+          }, 4500);
+        })
         .catch((err) => {
-          console.error(err);
+          toast.add({
+            severity: "error",
+            summary: "Erro!",
+            detail:
+              "Houve um erro ao deletar o contato! Tente novamente mais tarde.",
+            life: 3000,
+          });
         });
+    }
+
+    function handleDeleteConfirmation() {
+      confirmDialog.require({
+        message: `Você deseja mesmo remover ${state.contact.name} ${state.contact.lastName} da sua lista de contatos?`,
+        header: "Atenção!",
+        icon: "pi pi-info-circle",
+        rejectClass: "p-button-text p-button-text",
+        acceptClass: "p-button-danger p-button-text",
+        acceptLabel: 'Sim',
+        rejectLabel: 'Não',
+        accept: () => {
+          handleDelete();
+        },
+        reject: () => {
+          toast.add({
+            severity: "error",
+            summary: "Ação cancelada!",
+            detail: "O contato não foi deletado.",
+            life: 3000,
+          });
+        },
+      });
     }
 
     function clearErrors() {
@@ -196,6 +239,7 @@ export default {
       errors,
       clearErrors,
       handleUpdateData,
+      handleDeleteConfirmation,
       v$,
     };
   },
@@ -220,7 +264,7 @@ export default {
   gap: 8px;
 }
 .delete-btn {
-  background-color: #9B111E;
+  background-color: #9b111e;
   border: none;
 }
 </style>
