@@ -15,6 +15,9 @@ import InputMask from 'primevue/inputmask';
 import Toast from 'primevue/toast';
 import ConfirmDialog from 'primevue/confirmdialog';
 
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+
 const app = createApp(App);
 app.use(PrimeVue);
 app.use(ToastService);
@@ -29,3 +32,5 @@ app.component('InputText', InputText);
 app.component('InputMask', InputMask);
 app.component('Toast', Toast);
 app.component('ConfirmDialog', ConfirmDialog);
+app.component('DataTable', DataTable);
+app.component('Column', Column);
