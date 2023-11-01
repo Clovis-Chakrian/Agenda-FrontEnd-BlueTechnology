@@ -1,8 +1,18 @@
 <template>
   <Toast />
   <ConfirmDialog></ConfirmDialog>
-  <header>
-    <a href="">Voltar</a>
+  <header id="back-header">
+    <Button
+      icon="pi pi-arrow-left"
+      aria-label="Voltar a página anterior"
+      @click="handleGoBack()"
+    />
+    <Button
+      class="delete-btn"
+      icon="pi pi-trash"
+      aria-label="deletar contato"
+      @click="handleDeleteConfirmation()"
+    />
   </header>
   <main class="main">
     <Avatar
@@ -58,11 +68,6 @@
       }}</small>
 
       <Button label="Atualizar" @click="handleUpdateData()" />
-      <Button
-        label="Deletar"
-        class="delete-btn"
-        @click="handleDeleteConfirmation()"
-      />
     </form>
   </main>
 </template>
@@ -111,7 +116,6 @@ export default {
       api
         .get(`/Contact/${state.contactId}`)
         .then((res) => {
-          // console.log(res.data);
           const { name, lastName, phone, email } = res.data;
           state.contact.name = name;
           state.contact.lastName = lastName;
@@ -202,6 +206,10 @@ export default {
       });
     }
 
+    function handleGoBack() {
+      router.back();
+    }
+
     function clearErrors() {
       errors.name = "";
       errors.lastName = "";
@@ -216,6 +224,7 @@ export default {
       handleUpdateData,
       handleDeleteConfirmation,
       v$,
+      handleGoBack,
     };
   },
 };
@@ -241,5 +250,16 @@ export default {
 .delete-btn {
   background-color: #9b111e;
   border: none;
+}
+</style>
+
+<style scoped>
+#back-header {
+  width: 100%;
+  max-width: calc(800px * 0.9);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>
