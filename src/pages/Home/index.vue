@@ -19,6 +19,13 @@
     class="btn-add-contact"
     @click="handleNavigateToRoute('create')"
   />
+  <Button
+    icon="pi pi-replay"
+    rounded
+    aria-label="limpar filtro de busca"
+    class="btn-clear-filter"
+    @click="handleNavigateToRoute('create')"
+  />
 </template>
 
 <script>
@@ -69,8 +76,6 @@ export default {
         return;
       }
 
-      console.log(state.name, state.lastName);
-
       api
         .get(`/contact/search`, {
           params: {
@@ -87,10 +92,6 @@ export default {
       router.push({ name });
     }
 
-    function handleNavigateToEdit(id) {
-      router.push({ name: "edit", query: { contactId: id } });
-    }
-
     onMounted(() => {
       handleFetchData();
       window.addEventListener("resize", handleResize);
@@ -103,7 +104,6 @@ export default {
     return {
       state,
       handleNavigateToRoute,
-      handleNavigateToEdit,
       handleFilterData,
     };
   },
@@ -111,13 +111,6 @@ export default {
 </script>
 
 <style scoped>
-.table-header {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
 main {
   margin: 0px 0px 70px 0px;
   max-width: 100%;
@@ -129,12 +122,13 @@ main {
   top: calc(100% - 70px);
   left: calc(100% - 70px);
 }
-@media (max-width: 850px) {
-  .table-header {
-    flex-direction: column;
-    padding: 0px 40px;
-    gap: 10px;
-    align-items: center;
-  }
+.btn-clear-filter {
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  top: calc(100% - 70px);
+  right: calc(100% - 70px);
+  border: none;
+  background-color: #2196f3;
 }
 </style>
