@@ -16,7 +16,7 @@
   </header>
   <main class="main">
     <Avatar
-      label="CC"
+      :label="`${state.contact.name.split('')[0]}${state.contact.lastName.split('')[0]}`"
       size="xlarge"
       style="background-color: #2196f3; color: #ffffff"
       shape="circle"
