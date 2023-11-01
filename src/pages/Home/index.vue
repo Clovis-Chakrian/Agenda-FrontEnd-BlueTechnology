@@ -51,10 +51,13 @@ export default {
 </script>
 
 <style scoped>
+main {
+  margin: 0px 0px 70px 0px;
+}
 .btn-add-contact {
   width: 60px;
   height: 60px;
-  position: absolute;
+  position: fixed;
   top: calc(100% - 70px);
   left: calc(100% - 70px);
 }
