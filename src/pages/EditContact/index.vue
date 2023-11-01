@@ -162,7 +162,7 @@ export default {
         .delete(`/Contact/${state.contactId}`)
         .then(() => {
           toast.add({
-            severity: "info",
+            severity: "success",
             summary: "Contato deletado com sucesso!",
             detail: `${state.contact.name} ${state.contact.lastName} foi removido de sua lista de contatos com sucesso! Você será redirecionado para a página inicial agora.`,
             life: 5000,
@@ -197,7 +197,7 @@ export default {
         },
         reject: () => {
           toast.add({
-            severity: "error",
+            severity: "info",
             summary: "Ação cancelada!",
             detail: "O contato não foi deletado.",
             life: 3000,
