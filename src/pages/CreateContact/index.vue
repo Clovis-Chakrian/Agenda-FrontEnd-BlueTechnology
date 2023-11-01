@@ -68,6 +68,7 @@ import { validationRules } from "../../services/validation";
 import { useVuelidate } from "@vuelidate/core";
 import { useToast } from "primevue/usetoast";
 import { useRouter } from "vue-router";
+import { handleNotValidData } from '@/utils/notValidErrorHandler';
 
 export default {
   setup() {
@@ -94,33 +95,7 @@ export default {
       const isValid = await v$.value.$validate();
 
       if (!isValid) {
-        errors.name =
-          v$.value.name.$errors.length > 0
-            ? v$.value.name.$errors[0].$message
-            : "";
-
-        errors.lastName =
-          v$.value.lastName.$errors.length > 0
-            ? v$.value.lastName.$errors[0].$message
-            : "";
-
-        errors.phone =
-          v$.value.phone.$errors.length > 0
-            ? v$.value.phone.$errors[0].$message
-            : "";
-
-        errors.email =
-          v$.value.email.$errors.length > 0
-            ? v$.value.email.$errors[0].$message
-            : "";
-
-        toast.add({
-          severity: "error",
-          summary: "Erro de validação!",
-          detail:
-            "Houve um erro ao validar os dados recebidos. Verifique se estão todos nos formatos corretos e tente novamente.",
-          life: 3000,
-        });
+        handleNotValidData(errors, toast, v$)
         return;
       }
 
