@@ -9,7 +9,9 @@
   </header>
   <main class="main">
     <Avatar
-      label="CC"
+      :label="`${state.name !== '' ? state.name.split('')[0] : ''}${
+        state.lastName !== '' ? state.lastName.split('')[0] : ''
+      }`"
       size="xlarge"
       style="background-color: #2196f3; color: #ffffff"
       shape="circle"
@@ -106,7 +108,7 @@ export default {
       api
         .post("/Contact", {
           ...state,
-          email: state.email == '' ? null : state.email
+          email: state.email == "" ? null : state.email,
         })
         .then((res) => {
           toast.add({
