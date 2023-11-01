@@ -33,7 +33,7 @@
         errors.name || "&nbsp;"
       }}</small>
 
-      <label for="lastname">Sobrenome</label>
+      <label for="lastname">Sobrenome *</label>
       <InputText
         placeholder="Doe"
         name="lastname"
