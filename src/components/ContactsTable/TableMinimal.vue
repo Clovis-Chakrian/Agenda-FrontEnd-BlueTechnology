@@ -51,7 +51,7 @@ export default {
       });
 
       state.name = "",
-      state.lastName = ""
+      state.lastName = "";
     }
 
     onUpdated(() => {
