@@ -49,6 +49,9 @@ export default {
         name: state.name,
         lastName: state.lastName,
       });
+
+      state.name = "",
+      state.lastName = ""
     }
 
     onUpdated(() => {
