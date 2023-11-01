@@ -58,7 +58,11 @@
       }}</small>
 
       <Button label="Atualizar" @click="handleUpdateData()" />
-      <Button label="Deletar" class="delete-btn" @click="handleDeleteConfirmation()" />
+      <Button
+        label="Deletar"
+        class="delete-btn"
+        @click="handleDeleteConfirmation()"
+      />
     </form>
   </main>
 </template>
@@ -71,6 +75,7 @@ import { validationRules } from "../../services/validation";
 import { useVuelidate } from "@vuelidate/core";
 import { useToast } from "primevue/usetoast";
 import { useConfirm } from "primevue/useconfirm";
+import { handleNotValidData } from "../../utils/notValidErrorHandler";
 
 export default {
   setup() {
@@ -118,41 +123,11 @@ export default {
         });
     }
 
-    function handleNotValidData() {
-      errors.name =
-        v$.value.name.$errors.length > 0
-          ? v$.value.name.$errors[0].$message
-          : "";
-
-      errors.lastName =
-        v$.value.lastName.$errors.length > 0
-          ? v$.value.lastName.$errors[0].$message
-          : "";
-
-      errors.phone =
-        v$.value.phone.$errors.length > 0
-          ? v$.value.phone.$errors[0].$message
-          : "";
-
-      errors.email =
-        v$.value.email.$errors.length > 0
-          ? v$.value.email.$errors[0].$message
-          : "";
-
-      toast.add({
-        severity: "error",
-        summary: "Erro de validação!",
-        detail:
-          "Houve um erro ao validar os dados recebidos. Verifique se estão todos nos formatos corretos e tente novamente.",
-        life: 3000,
-      });
-    }
-
     async function handleUpdateData() {
       const isValid = await v$.value.$validate();
 
       if (!isValid) {
-        handleNotValidData();
+        handleNotValidData(errors, toast, v$);
         return;
       }
 
@@ -211,8 +186,8 @@ export default {
         icon: "pi pi-info-circle",
         rejectClass: "p-button-text p-button-text",
         acceptClass: "p-button-danger p-button-text",
-        acceptLabel: 'Sim',
-        rejectLabel: 'Não',
+        acceptLabel: "Sim",
+        rejectLabel: "Não",
         accept: () => {
           handleDelete();
         },
