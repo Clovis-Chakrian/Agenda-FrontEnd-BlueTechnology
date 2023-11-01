@@ -24,7 +24,7 @@
     rounded
     aria-label="limpar filtro de busca"
     class="btn-clear-filter"
-    @click="handleNavigateToRoute('create')"
+    @click="handleFetchData()"
   />
 </template>
 
@@ -105,6 +105,7 @@ export default {
       state,
       handleNavigateToRoute,
       handleFilterData,
+      handleFetchData
     };
   },
 };
