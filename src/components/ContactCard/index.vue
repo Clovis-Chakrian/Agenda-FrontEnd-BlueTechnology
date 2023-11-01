@@ -26,6 +26,8 @@
 .contact-card {
   display: flex;
   flex-direction: column;
+  width: 90vw;
+  max-width: calc(800px * 0.9);
 }
 
 .contact-card-info {
@@ -60,7 +62,7 @@ export default {
     }
 
     function handleNavigateToRoute() {
-      router.push({ name: 'edit', query: { contactId: props.id } });
+      router.push({ name: "edit", query: { contactId: props.id } });
     }
 
     onMounted(() => {
