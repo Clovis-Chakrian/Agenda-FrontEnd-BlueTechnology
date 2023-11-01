@@ -1,7 +1,11 @@
 <template>
   <Toast />
-  <header>
-    <a href="">Voltar</a>
+  <header id="back-header">
+    <Button
+      icon="pi pi-arrow-left"
+      aria-label="Voltar a página anterior"
+      @click="handleGoBack()"
+    />
   </header>
   <main class="main">
     <Avatar
@@ -68,7 +72,7 @@ import { validationRules } from "../../services/validation";
 import { useVuelidate } from "@vuelidate/core";
 import { useToast } from "primevue/usetoast";
 import { useRouter } from "vue-router";
-import { handleNotValidData } from '@/utils/notValidErrorHandler';
+import { handleNotValidData } from "@/utils/notValidErrorHandler";
 
 export default {
   setup() {
@@ -95,7 +99,7 @@ export default {
       const isValid = await v$.value.$validate();
 
       if (!isValid) {
-        handleNotValidData(errors, toast, v$)
+        handleNotValidData(errors, toast, v$);
         return;
       }
 
@@ -107,7 +111,8 @@ export default {
           toast.add({
             severity: "success",
             summary: "Sucesso!",
-            detail: "Contato adicionado com sucesso! Você será redirecionado para a tela inicial.",
+            detail:
+              "Contato adicionado com sucesso! Você será redirecionado para a tela inicial.",
             life: 3000,
           });
 
@@ -135,13 +140,29 @@ export default {
       errors.email = "";
     }
 
+    function handleGoBack() {
+      router.back();
+    }
+
     return {
       state,
       errors,
       v$,
       handleCreateContact,
       clearErrors,
+      handleGoBack,
     };
   },
 };
 </script>
+
+<style scoped>
+#back-header {
+  width: 100%;
+  max-width: calc(800px * 0.9);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+</style>
