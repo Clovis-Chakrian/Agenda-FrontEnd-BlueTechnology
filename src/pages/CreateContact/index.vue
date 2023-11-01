@@ -106,6 +106,7 @@ export default {
       api
         .post("/Contact", {
           ...state,
+          email: state.email == '' ? null : state.email
         })
         .then((res) => {
           toast.add({

@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 100%;
 }
 
 header {
@@ -25,5 +26,12 @@ header {
   align-items: center;
   margin-bottom: 20px;
   border-bottom: 1px solid #62bb82;
+}
+
+@media (max-width: 850px) {
+  header {
+    max-width: 100%;
+    font-size: 12px;
+  }
 }
 </style>

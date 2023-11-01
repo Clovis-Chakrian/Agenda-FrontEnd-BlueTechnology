@@ -3,18 +3,26 @@
     <div class="contact-card-info">
       <Avatar
         :label="state.initials"
-        size="large"
+        size="small"
         style="background-color: #2196f3; color: #ffffff"
         shape="circle"
       />
       <p class="contact-name">{{ name }} {{ lastName }}</p>
-      <Button size="small" text raised icon="pi pi-phone" aria-label="ligar" />
+      <Button
+        size="small"
+        class=".btn"
+        text
+        raised
+        icon="pi pi-phone"
+        aria-label="ligar"
+      />
       <Button
         size="small"
         text
         raised
         icon="pi pi-pencil"
         aria-label="editar contato"
+        class=".btn"
         @click="handleNavigateToRoute()"
       />
     </div>
@@ -26,19 +34,24 @@
 .contact-card {
   display: flex;
   flex-direction: column;
-  width: 90vw;
-  max-width: calc(800px * 0.9);
+  align-items: center;
+  width: 100%;
 }
 
 .contact-card-info {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  gap: 18px;
 }
 
 .contact-name {
-  width: 25%;
+  width: 90px;
+  font-size: 14px;
+}
+.btn {
+  width: 20px;
+  height: 20px;
 }
 </style>
 
