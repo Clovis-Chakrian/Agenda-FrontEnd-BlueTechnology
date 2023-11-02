@@ -15,6 +15,7 @@
         raised
         icon="pi pi-phone"
         aria-label="ligar"
+        @click="handlePhoneCall(phone)"
       />
       <Button
         size="small"
@@ -26,6 +27,7 @@
         @click="handleNavigateToRoute()"
       />
     </div>
+    <a href="tel:+"></a>
     <Divider />
   </div>
 </template>
@@ -60,7 +62,7 @@ import { onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
-  props: ["id", "name", "lastName"],
+  props: ["id", "name", "lastName", "phone"],
 
   setup(props) {
     const router = useRouter();
@@ -78,6 +80,10 @@ export default {
       router.push({ name: "edit", query: { contactId: props.id } });
     }
 
+    function handlePhoneCall(phone) {
+      window.open(`tel:+55${phone}`)
+    }
+
     onMounted(() => {
       handleGetInitials(props.name, props.lastName);
     });
@@ -85,6 +91,7 @@ export default {
     return {
       handleNavigateToRoute,
       state,
+      handlePhoneCall
     };
   },
 };
