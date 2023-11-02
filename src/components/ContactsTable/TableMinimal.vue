@@ -23,7 +23,7 @@
 
 
 <script>
-import { onUpdated, reactive } from "vue";
+import { onMounted, onUpdated, reactive } from "vue";
 import { useRouter } from "vue-router";
 import ContactCard from "../ContactCard/index.vue";
 
@@ -36,7 +36,7 @@ export default {
   setup(props, emiter) {
     const router = useRouter();
     const state = reactive({
-      contacts: props.contacts,
+      contacts: [],
       name: "",
       lastName: "",
     });
@@ -51,12 +51,15 @@ export default {
         lastName: state.lastName,
       });
 
-      state.name = "",
-      state.lastName = "";
+      (state.name = ""), (state.lastName = "");
     }
 
     onUpdated(() => {
-      state.contacts = props.contacts;
+      state.contacts = typeof props.contacts == "string" ? [] : props.contacts;
+    });
+
+    onMounted(() => {
+      state.contacts = typeof props.contacts == "string" ? [] : props.contacts;
     });
 
     return {

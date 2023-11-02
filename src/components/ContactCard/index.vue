@@ -70,9 +70,9 @@ export default {
       initials: "",
     });
 
-    function handleGetInitials(name, lastName) {
-      const firstLetter = name.split("")[0];
-      const secondLetter = lastName.split("")[0];
+    function handleGetInitials() {
+      const firstLetter = props.name !== '' && props.name !== undefined  ? props.name.split("")[0] : '';
+      const secondLetter = props.lastName !== '' && props.lastName !== undefined ? props.lastName.split("")[0] : '';
       state.initials = `${firstLetter}${secondLetter}`;
     }
 

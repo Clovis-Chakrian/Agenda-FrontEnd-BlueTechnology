@@ -13,9 +13,7 @@
     <Column header="Avatar">
       <template #body="contact">
         <Avatar
-          :label="`${contact.data.name.split('')[0]}${
-            contact.data.lastName.split('')[0]
-          }`"
+          :label="handleGetInitials(contact.data.name, contact.data.lastName)"
           size="large"
           style="background-color: #2196f3; color: #ffffff"
           shape="circle"
@@ -52,7 +50,7 @@ export default {
   setup(props, emiter) {
     const router = useRouter();
     const state = reactive({
-      contacts: props.contacts,
+      contacts: [],
       name: "",
       lastName: "",
     });
@@ -61,24 +59,40 @@ export default {
       router.push({ name: "edit", query: { contactId: id } });
     }
 
+    function handleGetInitials(name, lastName) {
+      const firstLetter =
+        name !== "" && name !== null && typeof name == "string"
+          ? name.split("")[0]
+          : "";
+      const secondLetter =
+        lastName !== "" && lastName !== null && typeof lastName == "string"
+          ? lastName.split("")[0]
+          : "";
+      return `${firstLetter}${secondLetter}`;
+    }
+
     function handleFilterData() {
       emiter.emit("filter", {
         name: state.name,
         lastName: state.lastName,
       });
 
-      state.name = "",
-      state.lastName = "";
+      (state.name = ""), (state.lastName = "");
     }
 
     onUpdated(() => {
-      state.contacts = props.contacts;
+      state.contacts = typeof props.contacts == "string" ? [] : props.contacts;
+    });
+
+    onUpdated(() => {
+      state.contacts = typeof props.contacts == "string" ? [] : props.contacts;
     });
 
     return {
       handleNavigateToEdit,
       state,
-      handleFilterData
+      handleFilterData,
+      handleGetInitials,
     };
   },
 };
