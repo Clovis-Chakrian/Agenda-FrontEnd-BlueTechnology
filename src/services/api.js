@@ -1,7 +1,17 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5029/api'
+  baseURL: '/api'
 });
+
+api.interceptors.response.use(res => {
+  if (typeof (res.data) != "object")
+    return {
+      ...res,
+      data: []
+    };
+
+  return res;
+})
 
 export { api };
